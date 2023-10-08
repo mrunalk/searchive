@@ -1,7 +1,9 @@
 {
-  "manifest_version":3,
-  "version":"1.0",
   "name":"SEARCHive",
+  "version":"0.1",
+  "description": "Chrome extension which helps search the link with major web archive providers such as archive.today(archive.is) and Internet Archive(archive.org)",
+  "manifest_version":3,
+
   "icons": {
     "16": "icon-19.png",
     "48": "icon-48.png",
