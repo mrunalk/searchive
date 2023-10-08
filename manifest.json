@@ -1,0 +1,31 @@
+{
+  "manifest_version":3,
+  "version":"1.0",
+  "name":"SEARCHive",
+  "icons": {
+    "16": "icon-19.png",
+    "48": "icon-48.png",
+    "96": "icon-96.png"
+  },
+  "action":{
+    "default_icon":{
+      "19":"icon-19.png",
+      "38":"icon-38.png"
+    }
+  },
+  "minimum_chrome_version": "93",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions":[
+    "tabs",
+    "contextMenus",
+    "storage"
+  ]
+}
