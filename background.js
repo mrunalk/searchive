@@ -1,9 +1,12 @@
 // Setting default value
-var favEngine = 'https://archive.is/';
+var defaultEngine = 'https://archive.ph/?run=1&url=';
 
 chrome.storage.sync.get(["favoriteEngine"]).then((result) => {
-  //console.log("Value currently is " + result.favoriteEngine);
-  favEngine = result.favoriteEngine;
+  if (result.favoriteEngine == null) {
+    chrome.storage.sync.set({ favoriteEngine: defaultEngine });
+  } else {
+    defaultEngine = result.favoriteEngine;
+  }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
@@ -14,7 +17,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     // );
     switch (key) {
       case 'favoriteEngine': 
-        favEngine = newValue;
+        defaultEngine = newValue;
         break;
     }
   }
@@ -25,28 +28,20 @@ chrome.action.onClicked.addListener(async (tab) => {
   chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     const query = tabs[0].url;
     const parts = query.split('?');
-    chrome.tabs.create({ url: favEngine + parts[0] });
+    chrome.tabs.create({ url: defaultEngine + parts[0] });
   });
 });
 
 chrome.contextMenus.onClicked.addListener(contextMenuOnClick);
 
-// A generic onclick callback function.
 function contextMenuOnClick(info) {
-  console.log('Url is: ', info.linkUrl);
   switch (info.menuItemId) {
     case 'archive.today':
-      // console.log('archive.today clicked.');
-      openTabFromContextMenu('https://archive.is/', info.linkUrl);
+      openTabFromContextMenu('https://archive.ph/?run=1&url=', info.linkUrl);
       break;
     case 'archive.org':
-      // Checkbox item function
-      // console.log('archive.org clicked.');
       openTabFromContextMenu('https://web.archive.org/', info.linkUrl);
       break;
-    // default:
-    //   // Standard context menu item function
-    //   console.log('Standard context menu item clicked.');
   }
 }
 
@@ -74,7 +69,6 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 function openTabFromContextMenu(searchEngine, contextUrl){
-  // console.log('Url is: ', contextUrl);
   const parts = contextUrl.split('?');
   chrome.tabs.create({ url: searchEngine + parts[0] });
 }

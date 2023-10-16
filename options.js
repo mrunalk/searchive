@@ -16,7 +16,7 @@ const saveOptions = () => {
 
 const restoreOptions = () => {
   chrome.storage.sync.get(
-    { favoriteEngine: 'https://archive.is'},
+    { favoriteEngine: 'https://archive.ph/?run=1&url='},
     (items) => {
       document.getElementById('searchengine').value = items.favoriteEngine;
     }

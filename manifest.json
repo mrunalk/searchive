@@ -1,6 +1,6 @@
 {
   "name":"SEARCHive",
-  "version":"0.1",
+  "version":"1.0",
   "description": "Chrome extension which helps search links with major web archive providers such as archive.org and archive.today",
   "manifest_version":3,
 
